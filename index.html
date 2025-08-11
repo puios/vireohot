@@ -74,7 +74,7 @@
 </div>
 
 <!-- Quảng cáo -->
-<div class="overlay-ad" id="adBox">
+<div class="overlay-ad" id="adBox" style="display: none;">
     <button class="close-btn" id="closeAd">X</button>
     <img src="quangcao.jpg" alt="Quảng cáo">
 </div>
@@ -84,9 +84,13 @@
     let videoContainer = document.getElementById("videoContainer");
     let closeAd = document.getElementById("closeAd");
     let fakeVideo = document.getElementById("fakeVideo");
+    
+    // Thêm setTimeout ở đây
+    setTimeout(function() {
+        adBox.style.display = "flex";             // Hiện quảng cáo sau 1 giây
+        videoContainer.classList.add("blurred");  // Làm mờ video
+    }, 1500);
 
-    // Làm mờ video khi quảng cáo xuất hiện
-    videoContainer.classList.add("blurred");
 
     closeAd.addEventListener("click", function() {
         window.open("https://s.shopee.vn/qZE2tE9Pa", "_blank");
@@ -103,6 +107,7 @@
 </body>
 
 </html>
+
 
 
 
