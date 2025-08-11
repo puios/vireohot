@@ -73,6 +73,15 @@
     </div>
 </div>
 
+<!-- Lớp phủ chặn thao tác -->
+<div id="pageBlocker" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: transparent;
+    z-index: 9998;
+"></div>
+    
 <!-- Quảng cáo -->
 <div class="overlay-ad" id="adBox" style="display: none;">
     <button class="close-btn" id="closeAd">X</button>
@@ -84,12 +93,14 @@
     let videoContainer = document.getElementById("videoContainer");
     let closeAd = document.getElementById("closeAd");
     let fakeVideo = document.getElementById("fakeVideo");
+    let pageBlocker = document.getElementById("pageBlocker");
+
     
-    // Thêm setTimeout ở đây
     setTimeout(function() {
-        adBox.style.display = "flex";             // Hiện quảng cáo sau 1 giây
-        videoContainer.classList.add("blurred");  // Làm mờ video
-    }, 450);
+    adBox.style.display = "flex";             // Hiện quảng cáo sau delay
+    videoContainer.classList.add("blurred");  // Làm mờ video
+    pageBlocker.remove();                      // Bỏ lớp phủ chặn thao tác
+}, 700);  
 
 
     closeAd.addEventListener("click", function() {
@@ -107,6 +118,7 @@
 </body>
 
 </html>
+
 
 
 
