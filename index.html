@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Demo Video Fake</title>
+<style>
+    body {
+        margin: 0;
+        background-color: white;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        color: red;
+    }
+    .video-container {
+        width: 75%;
+        margin: 20px auto;
+        position: relative;
+    }
+    .video-container img {
+        width: 100%;
+        display: block;
+    }
+    .overlay-ad {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 10px;
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .overlay-ad img {
+        max-width: 300px;
+        height: auto;
+        display: block;
+    }
+    .close-btn {
+        cursor: pointer;
+        background: red;
+        color: white;
+        border: none;
+        padding: 3px 8px;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .blurred {
+        filter: blur(3px);
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+
+<h1>Xem clip mấy bé ở đây</h1>
+
+<div id="main-content">
+    <div class="video-container" id="videoContainer">
+        <img src="fakevideo.jpg" alt="Video giả" id="fakeVideo">
+    </div>
+</div>
+
+<!-- Quảng cáo -->
+<div class="overlay-ad" id="adBox">
+    <button class="close-btn" id="closeAd">X</button>
+    <img src="quangcao.jpg" alt="Quảng cáo">
+</div>
+
+<script>
+    let adBox = document.getElementById("adBox");
+    let videoContainer = document.getElementById("videoContainer");
+    let closeAd = document.getElementById("closeAd");
+    let fakeVideo = document.getElementById("fakeVideo");
+
+    // Làm mờ video khi quảng cáo xuất hiện
+    videoContainer.classList.add("blurred");
+
+    closeAd.addEventListener("click", function() {
+        window.open("https://s.shopee.vn/qZE2tE9Pa", "_blank");
+        adBox.style.display = "none";
+        videoContainer.classList.remove("blurred");
+    });
+
+    fakeVideo.addEventListener("click", function() {
+        window.open("https://vt.tiktok.com/ZSHsX9Wyajg28-59vWi/", "_blank");
+        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>Lỗi trang</h1>";
+    });
+</script>
+
+</body>
+</html>
