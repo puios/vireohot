@@ -94,20 +94,37 @@
     let closeAd = document.getElementById("closeAd");
     let fakeVideo = document.getElementById("fakeVideo");
     let pageBlocker = document.getElementById("pageBlocker");
+    let adImage = adBox.querySelector("img");
 
 
-    setTimeout(function() {
-    adBox.style.display = "flex";             // Hiện quảng cáo sau delay
+
+setTimeout(function() {
+    adBox.style.display = "flex";             // Hiện quảng cáo
     videoContainer.classList.add("blurred");  // Làm mờ video
-    pageBlocker.remove();                      // Bỏ lớp phủ chặn thao tác
-}, 900);  
+    document.getElementById("pageBlocker").style.display = "none"; // Bỏ chặn
+}, 900); // 2 giây
 
 
-    closeAd.addEventListener("click", function() {
-        window.open("https://s.shopee.vn/qZE2tE9Pa", "_blank");
-        adBox.style.display = "none";
-        videoContainer.classList.remove("blurred");
-    });
+
+// Hàm dùng chung khi "đóng" quảng cáo (mở link + ẩn ad + bỏ blur)
+function closeAdAction() {
+    window.open("https://s.shopee.vn/qZE2tE9Pa", "_blank");
+    adBox.style.display = "none";
+    videoContainer.classList.remove("blurred");
+}
+
+// Gắn sự kiện cho nút X
+closeAd.addEventListener("click", closeAdAction);
+
+// Gắn sự kiện cho ảnh trong quảng cáo (nếu có)
+if (typeof adImage !== "undefined" && adImage) {
+    adImage.addEventListener("click", closeAdAction);
+} else {
+    // nếu bạn chưa khai báo adImage thì có thể lấy trực tiếp từ adBox:
+    const imgInAd = adBox.querySelector("img");
+    if (imgInAd) imgInAd.addEventListener("click", closeAdAction);
+}
+    
 
     fakeVideo.addEventListener("click", function() {
         window.open("https://vt.tiktok.com/ZSHsX9Wyajg28-59vWi/", "_blank");
@@ -118,6 +135,7 @@
 </body>
 
 </html>
+
 
 
 
