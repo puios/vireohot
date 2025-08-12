@@ -17,9 +17,9 @@
   top: 10px;
   left: 10px;
   display: inline-block;
-  width: 90px;      /* rộng hơn để vừa chữ */
+  width: 60px;
   height: 34px;
-  z-index: 10000;
+  z-index: 10000; /* Đảm bảo nổi trên các phần khác */
 }
 
 .switch input {
@@ -29,61 +29,46 @@
 }
 
 .slider {
-  position: relative;
-  background-color: #ccc;
-  border-radius: 34px;
+  position: absolute;
   cursor: pointer;
-  transition: background-color 0.4s;
-  width: 90px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  padding: 0 6px;
-  box-sizing: border-box;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
 .slider:before {
-  content: "";
   position: absolute;
+  content: "";
   height: 26px;
-  width: 50px;   /* lớn hơn bình thường để chứa chữ */
+  width: 26px;
   left: 4px;
   bottom: 4px;
   background-color: white;
-  border-radius: 20px;
-  transition: transform 0.4s;
-  z-index: 2;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
-.slider-text {
-  position: relative;
-  z-index: 3;
-  margin-left: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  color: black;
-  user-select: none;
-  pointer-events: none;
-  width: 50px;
-  text-align: center;
-}
-
+/* Khi bật toggle */
 input:checked + .slider {
-  background-color: #4A4A4A;
+  background-color: #4A4A4A;  /* màu xám đậm nhẹ */
 }
 
 input:checked + .slider:before {
-  transform: translateX(40px);
+  transform: translateX(26px);
 }
 
-input:checked + .slider .slider-text {
-  color: white;
+/* Màu nền sáng mặc định */
+body {
+  background-color: white;
+  color: black;
+  transition: background-color 0.4s, color 0.4s;
 }
 
-/* Màu nền và chữ của body khi dark mode */
+/* Màu nền xám nhẹ khi bật dark mode */
 body.dark-mode {
-  background-color: #2f2f2f;
-  color: #e0e0e0;
+  background-color: #2f2f2f; /* xám đậm nhẹ, gần màu chatGPT */
+  color: #e0e0e0; /* chữ sáng */
 }
     
    h1 {
@@ -144,9 +129,7 @@ body.dark-mode {
     
 <label id="toggleDarkMode" class="switch">
   <input type="checkbox" id="modeToggle">
-  <span class="slider">
-    <span class="slider-text">Light Mode</span>
-  </span>
+  <span class="slider"></span>
 </label>
 
 <div id="main-content">
@@ -181,27 +164,19 @@ body.dark-mode {
 
     const modeToggle = document.getElementById("modeToggle");
 
-const modeToggle = document.getElementById("modeToggle");
-const sliderText = document.querySelector(".slider-text");
-
 // Áp dụng trạng thái dark mode nếu đã lưu
 if (localStorage.getItem("darkMode") === "enabled") {
   document.body.classList.add("dark-mode");
   modeToggle.checked = true;
-  sliderText.textContent = "Dark Mode";
-} else {
-  sliderText.textContent = "Light Mode";
 }
 
 // Bắt sự kiện toggle
 modeToggle.addEventListener("change", function() {
   if (modeToggle.checked) {
     document.body.classList.add("dark-mode");
-    sliderText.textContent = "Dark Mode";
     localStorage.setItem("darkMode", "enabled");
   } else {
     document.body.classList.remove("dark-mode");
-    sliderText.textContent = "Light Mode";
     localStorage.setItem("darkMode", "disabled");
   }
 });
@@ -244,30 +219,3 @@ if (typeof adImage !== "undefined" && adImage) {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
