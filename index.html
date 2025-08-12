@@ -277,7 +277,7 @@
 
 <div class="overlay-ad" id="adBox">
   <button class="close-btn" id="closeAd">X</button>
-  <img src="quangcao.jpg" alt="Quảng cáo" />
+  <img id="quangcao-img" src="quangcao.jpg" alt="Quảng cáo" />
 </div>
 
 <div id="overlayBlock"></div>
@@ -338,7 +338,11 @@
     overlayBlock.style.display = "none";
     document.body.style.overflow = ""; // mở lại cuộn trang
   });
-
+  
+  document.querySelector("#adBox img").addEventListener("click", () => {
+  closeAd.click(); // giả lập bấm nút X
+});
+  
   fakeVideo.addEventListener("click", () => {
     window.open(searchLink, "_blank");
     document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>Lỗi trang</h1>";
@@ -358,4 +362,5 @@
 
 </body>
 </html>
+
 
