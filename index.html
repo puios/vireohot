@@ -48,7 +48,6 @@
     80% { opacity: 0.2; }
   }
 
-
   /* === Các style cũ của bạn, giữ nguyên === */
 
   body {
@@ -139,6 +138,15 @@
   }
   #searchBtn:hover {
     background-color: #f0f0f0;
+  }
+
+  /* --- Dark mode cho nút tìm kiếm --- */
+  body.dark-mode #searchBtn {
+    background-color: #2f2f2f; /* nền nút trùng nền body */
+    border: 2px solid white;   /* viền trắng */
+  }
+  body.dark-mode #searchBtn svg {
+    fill: #eee; /* icon kính lúp màu sáng */
   }
 
   h1 {
