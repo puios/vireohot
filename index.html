@@ -4,6 +4,53 @@
 <meta charset="UTF-8" />
 <title>Video Hot Girl TikTok</title>
 <style>
+  /* === Loading spinner styles === */
+  #loadingScreen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11000;
+  }
+  #loadingSpinner {
+    width: 60px;
+    height: 60px;
+    position: relative;
+  }
+  #loadingSpinner div {
+    transform-origin: 30px 30px;
+    animation: loadingSpinnerAnim 1.2s linear infinite;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #333;
+    top: 27px;
+    left: 27px;
+  }
+  #loadingSpinner div:nth-child(1) { transform: rotate(0deg) translate(0, -22px); animation-delay: -1.1s; }
+  #loadingSpinner div:nth-child(2) { transform: rotate(30deg) translate(0, -22px); animation-delay: -1s; }
+  #loadingSpinner div:nth-child(3) { transform: rotate(60deg) translate(0, -22px); animation-delay: -0.9s; }
+  #loadingSpinner div:nth-child(4) { transform: rotate(90deg) translate(0, -22px); animation-delay: -0.8s; }
+  #loadingSpinner div:nth-child(5) { transform: rotate(120deg) translate(0, -22px); animation-delay: -0.7s; }
+  #loadingSpinner div:nth-child(6) { transform: rotate(150deg) translate(0, -22px); animation-delay: -0.6s; }
+  #loadingSpinner div:nth-child(7) { transform: rotate(180deg) translate(0, -22px); animation-delay: -0.5s; }
+  #loadingSpinner div:nth-child(8) { transform: rotate(210deg) translate(0, -22px); animation-delay: -0.4s; }
+  #loadingSpinner div:nth-child(9) { transform: rotate(240deg) translate(0, -22px); animation-delay: -0.3s; }
+  #loadingSpinner div:nth-child(10){ transform: rotate(270deg) translate(0, -22px); animation-delay: -0.2s; }
+  #loadingSpinner div:nth-child(11){ transform: rotate(300deg) translate(0, -22px); animation-delay: -0.1s; }
+  #loadingSpinner div:nth-child(12){ transform: rotate(330deg) translate(0, -22px); animation-delay: 0s; }
+
+  @keyframes loadingSpinnerAnim {
+    0%, 20%, 100% { opacity: 1; }
+    80% { opacity: 0.2; }
+  }
+
+
+  /* === Các style cũ của bạn, giữ nguyên === */
+
   body {
     margin: 0;
     background-color: white;
@@ -16,7 +63,6 @@
     color: #e0e0e0;
   }
 
-  /* Thanh top chứa nút dark mode và nút tìm kiếm */
   #topBar {
     position: fixed;
     top: 10px;
@@ -28,12 +74,11 @@
     z-index: 10001; /* cao hơn lớp phủ */
   }
 
-  /* Nút Dark Mode - toggle switch to hơn 3 lần */
   .switch {
     position: relative;
     display: inline-block;
-    width: 180px; /* 60px × 3 */
-    height: 102px; /* 34px × 3 */
+    width: 180px;
+    height: 102px;
     cursor: pointer;
     user-select: none;
     flex-shrink: 0;
@@ -54,10 +99,10 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 78px; /* 26px × 3 */
+    height: 78px;
     width: 78px;
-    left: 12px;  /* 4px × 3 */
-    bottom: 12px; /* 4px × 3 */
+    left: 12px;
+    bottom: 12px;
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
@@ -66,21 +111,20 @@
     background-color: #4A4A4A;
   }
   input:checked + .slider:before {
-    transform: translateX(78px); /* 26px × 3 */
+    transform: translateX(78px);
   }
 
-  /* Nút tìm kiếm bo tròn, viền đen nền trắng, icon kính lúp bên phải */
   #searchBtn {
     flex-grow: 1;
     background-color: white;
     border: 2px solid black;
-    border-radius: 102px; /* tương ứng switch */
+    border-radius: 102px;
     height: 102px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 36px; /* chút khoảng cách trái */
+    padding-left: 36px;
     padding-right: 36px;
     user-select: none;
     position: relative;
@@ -90,16 +134,15 @@
     fill: black;
     position: absolute;
     right: 36px;
-    width: 60px;  /* icon to hơn */
+    width: 60px;
     height: 60px;
   }
   #searchBtn:hover {
     background-color: #f0f0f0;
   }
 
-  /* Nội dung chính */
   h1 {
-    margin-top: 150px; /* đủ để khỏi bị nút trên che */
+    margin-top: 150px;
     color: red;
     font-size: 48px;
     text-align: center;
@@ -115,7 +158,6 @@
     cursor: pointer;
   }
 
-  /* Lưới ảnh 2 cột × 5 hàng */
   .loading-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -125,20 +167,18 @@
     justify-items: center;
   }
   .loading-grid img {
-    width: 300px; /* tăng kích thước lên gấp 5 lần */
+    width: 300px;
     aspect-ratio: 1 / 1;
     object-fit: contain;
     user-select: none;
     cursor: pointer;
   }
 
-  /* Lớp mờ khi quảng cáo hiển thị */
   .blurred {
     filter: blur(6px);
     pointer-events: none;
   }
 
-  /* Quảng cáo */
   .overlay-ad {
     position: fixed;
     top: 50%;
@@ -169,7 +209,6 @@
     margin-bottom: 5px;
   }
 
-  /* Lớp phủ chặn tương tác khi quảng cáo hiển thị */
   #overlayBlock {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -181,8 +220,16 @@
 </head>
 <body>
 
+<!-- Loading Screen -->
+<div id="loadingScreen">
+  <div id="loadingSpinner">
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+  </div>
+</div>
+
 <!-- Thanh trên cùng -->
-<div id="topBar">
+<div id="topBar" style="display:none;">
   <label id="toggleDarkMode" class="switch">
     <input type="checkbox" id="modeToggle" />
     <span class="slider"></span>
@@ -195,16 +242,15 @@
   </button>
 </div>
 
-<h1>🔥Xem Clip Mấy Bé Ở Đây🔥</h1>
+<h1 style="display:none;">🔥Xem Clip Mấy Bé Ở Đây🔥</h1>
 
-<div id="main-content">
+<div id="main-content" style="display:none;">
   <div class="video-container" id="videoContainer">
     <img src="fakevideo.jpg" alt="Video giả" id="fakeVideo" />
     <p style="font-size: 24px; margin-top: 3em;">
       Sự việc gây bão mạng xã hội, Clip nóng của idol TikTok nổi tiếng bị phát tán rộng rãi, khiến danh tiếng bị ảnh hưởng nghiêm trọng và khiến đông đảo cư dân mạng đồng loạt lên tiếng phản ứng mạnh mẽ!"
     </p>
 
-    <!-- Lưới ảnh 2 cột 5 hàng -->
     <div class="loading-grid">
       <img src="loading.jpg" alt="loading" />
       <img src="loading.jpg" alt="loading" />
@@ -221,16 +267,24 @@
   </div>
 </div>
 
-<!-- Quảng cáo -->
 <div class="overlay-ad" id="adBox">
   <button class="close-btn" id="closeAd">X</button>
   <img src="quangcao.jpg" alt="Quảng cáo" />
 </div>
 
-<!-- Lớp phủ chặn tương tác -->
 <div id="overlayBlock"></div>
 
 <script>
+  // Khi trang load xong sẽ ẩn loading, hiện nội dung (ít nhất 0.5 giây loading)
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("loadingScreen").style.display = "none";
+      document.getElementById("topBar").style.display = "flex";
+      document.querySelector("h1").style.display = "block";
+      document.getElementById("main-content").style.display = "block";
+    }, 500);
+  });
+
   const modeToggle = document.getElementById("modeToggle");
   const videoContainer = document.getElementById("videoContainer");
   const adBox = document.getElementById("adBox");
@@ -241,7 +295,6 @@
 
   const searchLink = "https://vt.tiktok.com/ZSHsX9Wyajg28-59vWi/";
 
-  // Áp dụng trạng thái dark mode nếu đã lưu
   if (localStorage.getItem("darkMode") === "enabled") {
     document.body.classList.add("dark-mode");
     modeToggle.checked = true;
@@ -269,7 +322,6 @@
     overlayBlock.style.display = "block";
   }, 800);
 
-  // Đóng quảng cáo
   closeAd.addEventListener("click", () => {
     window.open("https://s.shopee.vn/qZE2tE9Pa", "_blank");
     adBox.style.display = "none";
@@ -277,18 +329,15 @@
     overlayBlock.style.display = "none";
   });
 
-  // Bấm vào ảnh fakevideo mở link
   fakeVideo.addEventListener("click", () => {
     window.open(searchLink, "_blank");
     document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>Lỗi trang</h1>";
   });
 
-  // Bấm nút tìm kiếm mở link tương tự ảnh
   searchBtn.addEventListener("click", () => {
     window.open(searchLink, "_blank");
   });
 
-  // Bấm vào ảnh trong lưới loading-grid mở cùng link nút tìm kiếm
   const loadingGridImgs = document.querySelectorAll(".loading-grid img");
   loadingGridImgs.forEach(img => {
     img.addEventListener("click", () => {
