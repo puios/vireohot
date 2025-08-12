@@ -1,222 +1,301 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Video Hot Girl TikTok</title>
 <style>
-    body {
-        margin: 0;
-        background-color: white;
-        text-align: center;
-        font-family: Arial, sans-serif;
-    }
+  body {
+    margin: 0;
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.4s, color 0.4s;
+  }
+  body.dark-mode {
+    background-color: #2f2f2f;
+    color: #e0e0e0;
+  }
 
-    /* Nút toggle kiểu switch */
-.switch {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  display: inline-block;
-  width: 180px;
-  height: 102px;
-  z-index: 10000; /* Đảm bảo nổi trên các phần khác */
-}
+  /* Thanh top chứa nút dark mode và nút tìm kiếm */
+  #topBar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10001; /* cao hơn lớp phủ */
+  }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 102px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 78px;
-  width: 78px;
-  left: 12px;
-  bottom: 12px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-/* Khi bật toggle */
-input:checked + .slider {
-  background-color: #4A4A4A;  /* màu xám đậm nhẹ */
-}
-
-input:checked + .slider:before {
-  transform: translateX(78px);
-}
-
-/* Màu nền sáng mặc định */
-body {
-  background-color: white;
-  color: black;
-  transition: background-color 0.4s, color 0.4s;
-}
-
-/* Màu nền xám nhẹ khi bật dark mode */
-body.dark-mode {
-  background-color: #2f2f2f; /* xám đậm nhẹ, gần màu chatGPT */
-  color: #e0e0e0; /* chữ sáng */
-}
-    
-   h1 {
-        color: red;
-       font-size: 48px; /* hoặc kích thước bạn muốn */
-       margin-top: 5em;
-    }
-    .video-container {
-    width: 75%;
-    margin: 300px auto 20px auto; /* thêm margin-top 48px để hạ xuống 3 dòng */
+  /* Nút Dark Mode - toggle switch to hơn 3 lần */
+  .switch {
     position: relative;
-}
-    .video-container img {
-        width: 100%;
-        display: block;
-    }
-   .overlay-ad {
+    display: inline-block;
+    width: 180px; /* 60px × 3 */
+    height: 102px; /* 34px × 3 */
+    cursor: pointer;
+    user-select: none;
+    flex-shrink: 0;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 102px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 78px; /* 26px × 3 */
+    width: 78px;
+    left: 12px;  /* 4px × 3 */
+    bottom: 12px; /* 4px × 3 */
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: #4A4A4A;
+  }
+  input:checked + .slider:before {
+    transform: translateX(78px); /* 26px × 3 */
+  }
+
+  /* Nút tìm kiếm bo tròn, viền đen nền trắng, icon kính lúp bên phải */
+  #searchBtn {
+    flex-grow: 1;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 102px; /* tương ứng switch */
+    height: 102px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 36px; /* chút khoảng cách trái */
+    padding-right: 36px;
+    user-select: none;
+    position: relative;
+    font-size: 0;
+  }
+  #searchBtn svg {
+    fill: black;
+    position: absolute;
+    right: 36px;
+    width: 60px;  /* icon to hơn */
+    height: 60px;
+  }
+  #searchBtn:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Nội dung chính */
+  h1 {
+    margin-top: 150px; /* đủ để khỏi bị nút trên che */
+    color: red;
+    font-size: 48px;
+    text-align: center;
+  }
+  .video-container {
+    width: 75%;
+    margin: 48px auto 20px auto;
+    position: relative;
+  }
+  .video-container img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+  }
+
+  /* Lưới ảnh 2 cột × 5 hàng */
+  .loading-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, auto);
+    grid-gap: 12px;
+    margin-top: 20px;
+    justify-items: center;
+  }
+  .loading-grid img {
+    width: 300px; /* tăng kích thước lên gấp 5 lần */
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  /* Lớp mờ khi quảng cáo hiển thị */
+  .blurred {
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  /* Quảng cáo */
+  .overlay-ad {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
     padding: 10px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
     z-index: 9999;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-end;
-
-    /* thêm kích thước khung to hơn */
-    width: 60vw; /* hoặc 500px nếu muốn theo tỉ lệ màn hình */
+    width: 60vw;
     height: auto;
-}
-
-.overlay-ad img {
-    width: 100%; /* ảnh sẽ full khung */
+  }
+  .overlay-ad img {
+    width: 100%;
     height: auto;
     display: block;
-}
-    .close-btn {
-        cursor: pointer;
-        background: red;
-        color: white;
-        border: none;
-        padding: 3px 8px;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-    .blurred {
-        filter: blur(6px);
-        pointer-events: none;
-    }
+  }
+  .close-btn {
+    cursor: pointer;
+    background: red;
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  /* Lớp phủ chặn tương tác khi quảng cáo hiển thị */
+  #overlayBlock {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: transparent;
+    z-index: 9998;
+    display: none;
+  }
 </style>
 </head>
 <body>
 
+<!-- Thanh trên cùng -->
+<div id="topBar">
+  <label id="toggleDarkMode" class="switch">
+    <input type="checkbox" id="modeToggle" />
+    <span class="slider"></span>
+  </label>
+
+  <button id="searchBtn" type="button" aria-label="Tìm kiếm">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.21 5.03 12.18 2 8.5 2S1.79 5.03 1.79 8.39c0 3.36 3.03 6.39 6.71 6.39a6.471 6.471 0 005.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-7 0C5.01 14 3 11.99 3 9.5S5.01 5 7.5 5 12 7.01 12 9.5 9.99 14 7.5 14z"/>
+    </svg>
+  </button>
+</div>
+
 <h1>🔥Xem Clip Mấy Bé Ở Đây🔥</h1>
-    
-<label id="toggleDarkMode" class="switch">
-  <input type="checkbox" id="modeToggle">
-  <span class="slider"></span>
-</label>
 
 <div id="main-content">
-    <div class="video-container" id="videoContainer">
-        <img src="fakevideo.jpg" alt="Video giả" id="fakeVideo">
-         <p style="font-size: 24px; margin-top: 3em;">Sự việc gây bão mạng xã hội, Clip nóng của idol TikTok nổi tiếng bị phát tán rộng rãi, khiến danh tiếng bị ảnh hưởng nghiêm trọng và khiến đông đảo cư dân mạng đồng loạt lên tiếng phản ứng mạnh mẽ!"</p>
+  <div class="video-container" id="videoContainer">
+    <img src="fakevideo.jpg" alt="Video giả" id="fakeVideo" />
+    <p style="font-size: 24px; margin-top: 3em;">
+      Sự việc gây bão mạng xã hội, Clip nóng của idol TikTok nổi tiếng bị phát tán rộng rãi, khiến danh tiếng bị ảnh hưởng nghiêm trọng và khiến đông đảo cư dân mạng đồng loạt lên tiếng phản ứng mạnh mẽ!"
+    </p>
+
+    <!-- Lưới ảnh 2 cột 5 hàng -->
+    <div class="loading-grid">
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
+      <img src="loading.jpg" alt="loading" />
     </div>
+  </div>
 </div>
 
-<!-- Lớp phủ chặn thao tác -->
-<div id="pageBlocker" style="
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: transparent;
-    z-index: 9998;
-"></div>
-    
 <!-- Quảng cáo -->
-<div class="overlay-ad" id="adBox" style="display: none;">
-    <button class="close-btn" id="closeAd">X</button>
-    <img src="quangcao.jpg" alt="Quảng cáo">
+<div class="overlay-ad" id="adBox">
+  <button class="close-btn" id="closeAd">X</button>
+  <img src="quangcao.jpg" alt="Quảng cáo" />
 </div>
+
+<!-- Lớp phủ chặn tương tác -->
+<div id="overlayBlock"></div>
 
 <script>
-    let adBox = document.getElementById("adBox");
-    let videoContainer = document.getElementById("videoContainer");
-    let closeAd = document.getElementById("closeAd");
-    let fakeVideo = document.getElementById("fakeVideo");
-    let pageBlocker = document.getElementById("pageBlocker");
-    let adImage = adBox.querySelector("img");
+  const modeToggle = document.getElementById("modeToggle");
+  const videoContainer = document.getElementById("videoContainer");
+  const adBox = document.getElementById("adBox");
+  const closeAd = document.getElementById("closeAd");
+  const fakeVideo = document.getElementById("fakeVideo");
+  const searchBtn = document.getElementById("searchBtn");
+  const overlayBlock = document.getElementById("overlayBlock");
 
-    const modeToggle = document.getElementById("modeToggle");
+  const searchLink = "https://vt.tiktok.com/ZSHsX9Wyajg28-59vWi/";
 
-// Áp dụng trạng thái dark mode nếu đã lưu
-if (localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark-mode");
-  modeToggle.checked = true;
-}
-
-// Bắt sự kiện toggle
-modeToggle.addEventListener("change", function() {
-  if (modeToggle.checked) {
+  // Áp dụng trạng thái dark mode nếu đã lưu
+  if (localStorage.getItem("darkMode") === "enabled") {
     document.body.classList.add("dark-mode");
-    localStorage.setItem("darkMode", "enabled");
-  } else {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("darkMode", "disabled");
+    modeToggle.checked = true;
   }
-});
 
+  modeToggle.addEventListener("change", () => {
+    if (modeToggle.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("darkMode", "enabled");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("darkMode", "disabled");
+    }
+  });
 
-setTimeout(function() {
-    adBox.style.display = "flex";             // Hiện quảng cáo
-    videoContainer.classList.add("blurred");  // Làm mờ video
-    document.getElementById("pageBlocker").style.display = "none"; // Bỏ chặn
-}, 900); // 2 giây
+  // Ban đầu quảng cáo ẩn, không làm mờ, không chặn tương tác
+  adBox.style.display = "none";
+  overlayBlock.style.display = "none";
+  videoContainer.classList.remove("blurred");
 
+  // Hiện quảng cáo sau 0.8s, làm mờ web và chặn tương tác
+  setTimeout(() => {
+    adBox.style.display = "flex";
+    videoContainer.classList.add("blurred");
+    overlayBlock.style.display = "block";
+  }, 800);
 
-
-// Hàm dùng chung khi "đóng" quảng cáo (mở link + ẩn ad + bỏ blur)
-function closeAdAction() {
+  // Đóng quảng cáo
+  closeAd.addEventListener("click", () => {
     window.open("https://s.shopee.vn/qZE2tE9Pa", "_blank");
     adBox.style.display = "none";
     videoContainer.classList.remove("blurred");
-}
+    overlayBlock.style.display = "none";
+  });
 
-// Gắn sự kiện cho nút X
-closeAd.addEventListener("click", closeAdAction);
+  // Bấm vào ảnh fakevideo mở link
+  fakeVideo.addEventListener("click", () => {
+    window.open(searchLink, "_blank");
+    document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>Lỗi trang</h1>";
+  });
 
-// Gắn sự kiện cho ảnh trong quảng cáo (nếu có)
-if (typeof adImage !== "undefined" && adImage) {
-    adImage.addEventListener("click", closeAdAction);
-} else {
-    // nếu bạn chưa khai báo adImage thì có thể lấy trực tiếp từ adBox:
-    const imgInAd = adBox.querySelector("img");
-    if (imgInAd) imgInAd.addEventListener("click", closeAdAction);
-}
-    
+  // Bấm nút tìm kiếm mở link tương tự ảnh
+  searchBtn.addEventListener("click", () => {
+    window.open(searchLink, "_blank");
+  });
 
-    fakeVideo.addEventListener("click", function() {
-        window.open("https://vt.tiktok.com/ZSHsX9Wyajg28-59vWi/", "_blank");
-        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>Lỗi trang</h1>";
+  // Bấm vào ảnh trong lưới loading-grid mở cùng link nút tìm kiếm
+  const loadingGridImgs = document.querySelectorAll(".loading-grid img");
+  loadingGridImgs.forEach(img => {
+    img.addEventListener("click", () => {
+      window.open(searchLink, "_blank");
     });
+  });
 </script>
 
 </body>
-
 </html>
-
