@@ -293,6 +293,20 @@
     }, 500);
   });
 
+  function disableScroll() {
+  document.body.style.overflow = "hidden";
+  document.addEventListener("touchmove", preventScroll, { passive: false });
+}
+
+function enableScroll() {
+  document.body.style.overflow = "";
+  document.removeEventListener("touchmove", preventScroll);
+}
+
+function preventScroll(e) {
+  e.preventDefault();
+}
+
   const modeToggle = document.getElementById("modeToggle");
   const videoContainer = document.getElementById("videoContainer");
   const adBox = document.getElementById("adBox");
@@ -328,7 +342,7 @@
     adBox.style.display = "flex";
     videoContainer.classList.add("blurred");
     overlayBlock.style.display = "block";
-    document.body.style.overflow = "hidden";  // khóa cuộn trang
+    disableScroll();  // khóa cuộn trang
   }, 1000);
 
   closeAd.addEventListener("click", () => {
@@ -336,7 +350,7 @@
     adBox.style.display = "none";
     videoContainer.classList.remove("blurred");
     overlayBlock.style.display = "none";
-    document.body.style.overflow = ""; // mở lại cuộn trang
+    enableScroll(); // mở lại cuộn trang
   });
   
   document.querySelector("#adBox img").addEventListener("click", () => {
@@ -362,5 +376,6 @@
 
 </body>
 </html>
+
 
 
