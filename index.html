@@ -10,6 +10,67 @@
         text-align: center;
         font-family: Arial, sans-serif;
     }
+
+    /* Nút toggle kiểu switch */
+.switch {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  z-index: 10000; /* Đảm bảo nổi trên các phần khác */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Khi bật toggle */
+input:checked + .slider {
+  background-color: #4A4A4A;  /* màu xám đậm nhẹ */
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Màu nền sáng mặc định */
+body {
+  background-color: white;
+  color: black;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+/* Màu nền xám nhẹ khi bật dark mode */
+body.dark-mode {
+  background-color: #2f2f2f; /* xám đậm nhẹ, gần màu chatGPT */
+  color: #e0e0e0; /* chữ sáng */
+}
+    
    h1 {
         color: red;
        font-size: 48px; /* hoặc kích thước bạn muốn */
@@ -65,6 +126,11 @@
 <body>
 
 <h1>🔥Xem Clip Mấy Bé Ở Đây🔥</h1>
+    
+<label id="toggleDarkMode" class="switch">
+  <input type="checkbox" id="modeToggle">
+  <span class="slider"></span>
+</label>
 
 <div id="main-content">
     <div class="video-container" id="videoContainer">
@@ -96,6 +162,24 @@
     let pageBlocker = document.getElementById("pageBlocker");
     let adImage = adBox.querySelector("img");
 
+    const modeToggle = document.getElementById("modeToggle");
+
+// Áp dụng trạng thái dark mode nếu đã lưu
+if (localStorage.getItem("darkMode") === "enabled") {
+  document.body.classList.add("dark-mode");
+  modeToggle.checked = true;
+}
+
+// Bắt sự kiện toggle
+modeToggle.addEventListener("change", function() {
+  if (modeToggle.checked) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("darkMode", "enabled");
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("darkMode", "disabled");
+  }
+});
 
 
 setTimeout(function() {
@@ -135,6 +219,7 @@ if (typeof adImage !== "undefined" && adImage) {
 </body>
 
 </html>
+
 
 
 
