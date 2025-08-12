@@ -323,11 +323,12 @@
   overlayBlock.style.display = "none";
   videoContainer.classList.remove("blurred");
 
-  // Hiện quảng cáo sau 0.8s, làm mờ web và chặn tương tác
+  // Hiện quảng cáo sau 0.8s, làm mờ web và chặn tương tác + khóa cuộn trang
   setTimeout(() => {
     adBox.style.display = "flex";
     videoContainer.classList.add("blurred");
     overlayBlock.style.display = "block";
+    document.body.style.overflow = "hidden";  // khóa cuộn trang
   }, 800);
 
   closeAd.addEventListener("click", () => {
@@ -335,6 +336,7 @@
     adBox.style.display = "none";
     videoContainer.classList.remove("blurred");
     overlayBlock.style.display = "none";
+    document.body.style.overflow = ""; // mở lại cuộn trang
   });
 
   fakeVideo.addEventListener("click", () => {
