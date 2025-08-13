@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Video Hot Girl TikTok</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   /* === Loading spinner styles === */
   #loadingScreen {
@@ -48,8 +49,6 @@
     80% { opacity: 0.2; }
   }
 
-  /* === Các style cũ của bạn, giữ nguyên === */
-
   body {
     margin: 0;
     background-color: white;
@@ -70,7 +69,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    z-index: 10001; /* cao hơn lớp phủ */
+    z-index: 10001;
   }
 
   .switch {
@@ -139,14 +138,12 @@
   #searchBtn:hover {
     background-color: #f0f0f0;
   }
-
-  /* --- Dark mode cho nút tìm kiếm --- */
   body.dark-mode #searchBtn {
-    background-color: #2f2f2f; /* nền nút trùng nền body */
-    border: 2px solid white;   /* viền trắng */
+    background-color: #2f2f2f;
+    border: 2px solid white;
   }
   body.dark-mode #searchBtn svg {
-    fill: #eee; /* icon kính lúp màu sáng */
+    fill: #eee;
   }
 
   h1 {
@@ -224,6 +221,39 @@
     z-index: 9998;
     display: none;
   }
+
+  /* Footer cố định + icon + hover */
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0; right: 0;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+    z-index: 10002;
+  }
+  footer a.footer-link {
+    color: #ccc;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: transform 0.2s, color 0.2s;
+  }
+  footer a.footer-link i {
+    display: block;
+    margin-bottom: 4px;
+    transition: transform 0.2s, color 0.2s;
+  }
+  footer a.footer-link:hover {
+    color: #ff6600;
+    transform: translateY(-4px);
+  }
+  footer a.footer-link:hover i {
+    transform: scale(1.2);
+    color: #ff6600;
+  }
 </style>
 </head>
 <body>
@@ -256,7 +286,7 @@
   <div class="video-container" id="videoContainer">
     <img src="fakevideo.jpg" alt="Video giả" id="fakeVideo" />
     <p style="font-size: 24px; margin-top: 3em;">
-      Sự việc gây bão mạng xã hội, Clip nóng của idol TikTok nổi tiếng bị phát tán rộng rãi, khiến danh tiếng bị ảnh hưởng nghiêm trọng và khiến đông đảo cư dân mạng đồng loạt lên tiếng phản ứng mạnh mẽ!"
+      Sự việc gây bão mạng xã hội, Clip nóng của idol TikTok nổi tiếng bị phát tán rộng rãi, khiến danh tiếng bị ảnh hưởng nghiêm trọng và khiến đông đảo cư dân mạng đồng loạt lên tiếng phản ứng mạnh mẽ!
     </p>
 
     <div class="loading-grid">
@@ -265,7 +295,6 @@
       <img src="loading.jpg" alt="loading" />
       <img src="loading.jpg" alt="loading" />
       <img src="loading.jpg" alt="loading" />
-
       <img src="loading.jpg" alt="loading" />
       <img src="loading.jpg" alt="loading" />
       <img src="loading.jpg" alt="loading" />
@@ -275,15 +304,22 @@
   </div>
 </div>
 
+<!-- Quảng cáo overlay -->
 <div class="overlay-ad" id="adBox">
   <button class="close-btn" id="closeAd">X</button>
   <img id="quangcao-img" src="quangcao.jpg" alt="Quảng cáo" />
 </div>
-
 <div id="overlayBlock"></div>
 
+<!-- Footer cố định -->
+<footer>
+  <a href="#" onclick="return false;" class="footer-link"><i class="fa-solid fa-house fa-2x"></i><br>Trang Chủ</a>
+  <a href="#" onclick="return false;" class="footer-link"><i class="fa-solid fa-compass fa-2x"></i><br>Khám Phá</a>
+  <a href="#" onclick="return false;" class="footer-link"><i class="fa-solid fa-fire fa-2x"></i><br>Top Lượt Xem</a>
+  <a href="#" onclick="return false;" class="footer-link"><i class="fa-solid fa-clock fa-2x"></i><br>Mới Nhất</a>
+</footer>
+
 <script>
-  // Khi trang load xong sẽ ẩn loading, hiện nội dung (ít nhất 0.5 giây loading)
   window.addEventListener("load", () => {
     setTimeout(() => {
       document.getElementById("loadingScreen").style.display = "none";
@@ -293,19 +329,9 @@
     }, 500);
   });
 
-  function disableScroll() {
-  document.body.style.overflow = "hidden";
-  document.addEventListener("touchmove", preventScroll, { passive: false });
-}
-
-function enableScroll() {
-  document.body.style.overflow = "";
-  document.removeEventListener("touchmove", preventScroll);
-}
-
-function preventScroll(e) {
-  e.preventDefault();
-}
+  function disableScroll() { document.body.style.overflow = "hidden"; document.addEventListener("touchmove", preventScroll, { passive: false }); }
+  function enableScroll() { document.body.style.overflow = ""; document.removeEventListener("touchmove", preventScroll); }
+  function preventScroll(e) { e.preventDefault(); }
 
   const modeToggle = document.getElementById("modeToggle");
   const videoContainer = document.getElementById("videoContainer");
@@ -332,17 +358,12 @@ function preventScroll(e) {
     }
   });
 
-  // Ban đầu quảng cáo ẩn, không làm mờ, không chặn tương tác
-  adBox.style.display = "none";
-  overlayBlock.style.display = "none";
-  videoContainer.classList.remove("blurred");
-
-  // Hiện quảng cáo sau 0.8s, làm mờ web và chặn tương tác + khóa cuộn trang
+  // Hiển thị quảng cáo sau 1 giây, làm mờ nội dung và khóa cuộn
   setTimeout(() => {
     adBox.style.display = "flex";
     videoContainer.classList.add("blurred");
     overlayBlock.style.display = "block";
-    disableScroll();  // khóa cuộn trang
+    disableScroll();
   }, 1000);
 
   closeAd.addEventListener("click", () => {
@@ -350,13 +371,13 @@ function preventScroll(e) {
     adBox.style.display = "none";
     videoContainer.classList.remove("blurred");
     overlayBlock.style.display = "none";
-    enableScroll(); // mở lại cuộn trang
+    enableScroll();
   });
-  
+
   document.querySelector("#adBox img").addEventListener("click", () => {
-  closeAd.click(); // giả lập bấm nút X
-});
-  
+    closeAd.click();
+  });
+
   fakeVideo.addEventListener("click", () => {
     window.open(searchLink, "_blank");
     document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>Lỗi trang</h1>";
@@ -376,6 +397,3 @@ function preventScroll(e) {
 
 </body>
 </html>
-
-
-
