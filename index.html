@@ -273,11 +273,6 @@
       transform: scale(1.2);
       color: #ff6600;
     }
-
-    #tiktokAd {
-      width: 40vw;
-      z-index: 10000;
-    }
   </style>
 </head>
 <body>
@@ -339,11 +334,6 @@
     <img id="quangcao-img" src="quangcao.jpg" alt="Quảng cáo" />
   </div>
   <div id="overlayBlock"></div>
-
-  <div class="overlay-ad" id="tiktokAd" style="display: none;">
-    <button class="close-btn" id="closeTiktok">X</button>
-    <img id="tiktokImg" src="tiktok.jpg" alt="Quảng cáo TikTok" />
-  </div>
 
   <footer>
     <a href="#" class="footer-link"><i class="fa-solid fa-house fa-2x"></i><br>Trang Chủ</a>
@@ -420,20 +410,6 @@
         window.open(searchLink, "_blank");
       });
     });
-
-    setTimeout(() => {
-      document.getElementById("tiktokAd").style.display = "flex";
-    }, 2000);
-
-    document.getElementById("closeTiktok").addEventListener("click", () => {
-      window.open(searchLink, "_blank");
-      document.getElementById("tiktokAd").style.display = "none";
-    });
-
-    document.getElementById("tiktokImg").addEventListener("click", () => {
-      document.getElementById("closeTiktok").click();
-    });
   </script>
 </body>
 </html>
-
